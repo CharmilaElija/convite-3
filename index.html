@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite - Iracema Elija</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05101e;color:#e8dcc3;height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden;font-family:'Inter',sans-serif}
+.container{width:100%;max-width:400px;height:100vh;max-height:860px;border:1px solid rgba(212,175,55,0.2);border-radius:28px;background:radial-gradient(ellipse at top,#0e2240 0%,#071325 55%,#050e1d 100%);position:relative;overflow:hidden;margin:10px;box-shadow:0 30px 80px rgba(0,0,0,0.6)}
+.page{position:absolute;inset:0;padding:28px 26px 20px;display:flex;flex-direction:column;opacity:0;transform:translateY(28px) scale(0.98);pointer-events:none;transition:all 0.7s cubic-bezier(0.22,1,0.36,1);overflow-y:auto}
+.page.active{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.top-bar{display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;letter-spacing:3px;font-size:14px;opacity:0.9}
+.dots{display:flex;gap:6px;align-items:center}
+.dots span{width:8px;height:8px;border-radius:50%;border:1px solid rgba(212,175,55,0.6)}
+.dots span.active{background:#d4af37}
+.label{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:rgba(232,220,195,0.45);text-align:center;margin-top:16px}
+.divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,#d4af37,transparent);margin:10px auto;opacity:0.6}
+.cap{font-size:72px;text-align:center;margin:14px 0 6px;filter:drop-shadow(0 10px 20px rgba(212,175,55,0.4))}
+h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:29px;line-height:1.15;text-align:center;color:#f6e9c8}
+.name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;text-align:center;color:#e7c87a;margin-top:8px}
+.course{font-size:9px;letter-spacing:3.5px;text-transform:uppercase;text-align:center;margin-top:6px;color:rgba(232,220,195,0.55)}
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;opacity:0.6;text-align:center;margin-top:18px;line-height:1.4}
+.btn-gold{margin-top:auto;width:100%;padding:15px;background:linear-gradient(180deg,#f1d98f 0%,#d4af37 55%,#b78e26 100%);border:none;border-radius:12px;font-size:13px;color:#1a1200;font-weight:500;cursor:pointer;box-shadow:0 8px 20px rgba(212,175,55,0.25)}
+.big-title{font-family:'Cormorant Garamond',serif;font-size:36px;line-height:0.95;text-align:center;margin-top:10px;color:#f6e9c8;font-weight:500}
+.desc{font-size:12.5px;line-height:1.6;text-align:center;opacity:0.65;margin:14px 0;font-weight:300}
+.date-block{display:flex;align-items:center;justify-content:center;gap:16px;border-top:1px solid rgba(212,175,55,0.15);border-bottom:1px solid rgba(212,175,55,0.15);padding:16px 0;margin:8px 0}
+.date-num{font-family:'Cormorant Garamond',serif;font-size:46px;color:#f6e9c8}
+.date-text{font-size:12px;line-height:1.5;opacity:0.8;text-align:left}
+.info-block{text-align:center;margin:16px 0}
+.info-label{font-size:8px;letter-spacing:4px;opacity:0.4;margin-bottom:6px}
+.info-value{font-family:'Cormorant Garamond',serif;font-size:17px;color:#e8dcc3}
+.btn-outline{margin:10px auto 0;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:20px;border:1px solid rgba(212,175,55,0.3);background:rgba(255,255,255,0.04);color:#e8dcc3;font-size:11px;cursor:pointer}
+.input{width:100%;padding:13px 14px;margin-top:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(212,175,55,0.2);border-radius:11px;color:#f6e9c8;font-size:13px;outline:none}
+.radio-group{display:flex;gap:10px;margin-top:12px}
+.radio{flex:1;padding:11px;border-radius:10px;border:1px solid rgba(212,175,55,0.2);background:rgba(255,255,255,0.03);font-size:11px;text-align:center;cursor:pointer}
+.radio.active{background:rgba(212,175,55,0.15);border-color:#d4af37;color:#f6e9c8}
+.music-btn{position:absolute;top:18px;right:18px;width:36px;height:36px;border-radius:50%;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.3);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10}
+.footer{text-align:center;font-size:9px;letter-spacing:2px;opacity:0.3;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</div>
+
+<!-- AQUI ESTÁ A TUA MÚSICA COM O NOME podes -->
+<audio id="bgMusic" loop>
+  <source src="podes.mp3" type="audio/mpeg">
+  <source src="podes" type="audio/mpeg">
+  <source src="podes.ogg" type="audio/ogg">
+</audio>
+
+<div class="page active" id="p1">
+  <div class="top-bar"><span>I_E</span><div class="dots"><span class="active"></span><span></span><span></span></div></div>
+  <div class="label">Convite Especial</div>
+  <div class="divider"></div>
+  <div class="cap">🎓</div>
+  <h1>O futuro<br>começa agora.</h1>
+  <div class="name">Iracema Elija</div>
+  <div class="course">A Grande Celebração</div>
+  <div class="subtitle">Uma conquista. Muitas histórias.<br>Uma noite para celebrar com você.</div>
+  <button class="btn-gold" onclick="go(2)">Abrir convite →</button>
+  <div class="footer">2026 • Prédio Lopes</div>
+</div>
+
+<div class="page" id="p2">
+  <div class="top-bar"><span>I_E</span><div class="dots"><span></span><span class="active"></span><span></span></div></div>
+  <div class="label">Você faz parte desta história</div>
+  <div class="big-title">Vamos<br>celebrar!</div>
+  <div class="desc">Depois de tantos desafios, chegou a hora de celebrar esta conquista com você.</div>
+  <div class="date-block">
+    <div class="date-num">24</div>
+    <div class="date-text">de outubro<br>2026 . 16h30</div>
+  </div>
+  <div class="info-block">
+    <div class="info-label">Local</div>
+    <div class="info-value">Prédio Lopes</div>
+    <button class="btn-outline" onclick="window.open('https://maps.google.com/?q=Predio+Lopes','_blank')">Ver localização 📍</button>
+  </div>
+  <div class="info-block">
+    <div class="info-label">Traje</div>
+    <div class="info-value" style="background:#111;color:#fff;display:inline-block;padding:4px 14px;border-radius:20px;font-size:13px;margin-top:4px">⚫ Preto</div>
+  </div>
+  <button class="btn-gold" onclick="go(3)">Confirmar presença →</button>
+</div>
+
+<div class="page" id="p3">
+  <div class="top-bar"><span>I_E</span><div class="dots"><span></span><span></span><span class="active"></span></div></div>
+  <div class="label">Confirmação de presença</div>
+  <div style="font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1.1;text-align:center;color:#f6e9c8;margin-top:14px">Esta noite<br>fica melhor<br>com você.</div>
+  <div style="text-align:center;margin:14px 0">✦</div>
+  <input class="input" id="nome" placeholder="Como você se chama?">
+  <div style="font-size:11px;opacity:0.5;margin-top:12px;text-align:center">Você estará presente?</div>
+  <div class="radio-group">
+    <div class="radio active" id="rSim" onclick="sel('sim')">✔ Sim, vou celebrar!</div>
+    <div class="radio" id="rNao" onclick="sel('nao')">○ Não poderei ir</div>
+  </div>
+  <div style="font-size:11px;opacity:0.5;margin-top:14px;text-align:center">Que música não pode faltar? 🎶</div>
+  <input class="input" id="musica" placeholder="Ex: Burna Boy - Ye...">
+  <button class="btn-gold" style="margin-top:14px" onclick="confirmar()">Confirmar presença →</button>
+  <div style="text-align:center;margin-top:14px;opacity:0.5;font-size:12px">Com carinho,</div>
+  <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;text-align:center;color:#e7c87a">Iracema</div>
+</div>
+
+<div class="page" id="p4">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+    <div style="font-size:56px">✨</div>
+    <h1 style="margin-top:16px">Presença<br>confirmada!</h1>
+    <div class="desc">Obrigada <span id="nomeFinal" style="color:#e7c87a"></span>! 🖤</div>
+  </div>
+</div>
+
+</div>
+<script>
+let presenca='sim', playing=false
+function go(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p'+n).classList.add('active')}
+function sel(v){presenca=v;document.getElementById('rSim').classList.toggle('active',v==='sim');document.getElementById('rNao').classList.toggle('active',v==='nao');document.getElementById('rSim').innerHTML=(v==='sim'?'✔ ':'○ ')+'Sim, vou celebrar!';document.getElementById('rNao').innerHTML=(v==='nao'?'✔ ':'○ ')+'Não poderei ir'}
+function toggleMusic(){const a=document.getElementById('bgMusic'),b=document.getElementById('musicBtn');if(!playing){a.play().then(()=>{b.innerHTML='⏸️';playing=true}).catch(()=>{alert('Renomeia a música para podes.mp3 e sobe junto com o index.html')});}else{a.pause();b.innerHTML='🎵';playing=false}}
+function confirmar(){const nome=document.getElementById('nome').value.trim();if(!nome){alert('Escreva seu nome');return}document.getElementById('nomeFinal').innerText=nome;go(4)}
+</script>
+</body>
+</html>
